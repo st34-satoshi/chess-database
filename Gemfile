@@ -70,3 +70,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# added by me
+gem 'pry-rails'
+gem 'public_uid'
+gem 'sitemap_generator'
