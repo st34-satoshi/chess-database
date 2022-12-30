@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head prefix="og: https://ogp.me/ns#">
     <title>ChessDatabase</title>
+    <meta name="description" content="チェスデータベース。公式戦の棋譜の記録・閲覧ができます。プレイヤー名や局面から対局の検索ができます。">
+    <meta property="og:title" content="ChessDatabase">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= records_url %>">
+    <meta property="og:description" content="チェスデータベース。公式戦の棋譜の記録・閲覧ができます。プレイヤー名や局面から対局の検索ができます。">
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
