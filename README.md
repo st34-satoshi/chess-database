@@ -35,7 +35,9 @@ Web site. Save chess games.
 ### sitemap
 We use [sitemap_generator](https://github.com/kjvarga/sitemap_generator#rails).
 
-Generate public/sitemap.xml.gz file by `rake sitemap:refresh`.
+Generate public/sitemap.xml.gz file by 
+1. `rake sitemap:install`.
+1. `rake sitemap:refresh`.
 
 This file is ignored by git.
 

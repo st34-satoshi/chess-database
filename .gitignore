@@ -32,3 +32,6 @@
 
 /run/*
 !/run/.kepp
+
+# Ignore sitemap file
+public/sitemap.xml.gz
