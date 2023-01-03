@@ -35,3 +35,5 @@
 
 # Ignore sitemap file
 public/sitemap.xml.gz
+
+*/.DS_Store
