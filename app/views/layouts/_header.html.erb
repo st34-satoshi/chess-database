@@ -17,11 +17,12 @@
         </li>
       </ul>
       <% if logged_in? %>
-        <div>
+        <div class="me-1">
           <%= current_user.name %>
         </div>
+        <%= link_to 'Log out', logout_path, method: "delete", data: { turbo_method: :delete } %>
       <% else %>
-        <%= link_to 'sign up', signup_path %>
+        <%= link_to 'Sign up', signup_path %>
       <% end %>
     </div>
   </div>
