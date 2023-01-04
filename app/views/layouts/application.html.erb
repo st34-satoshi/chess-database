@@ -17,6 +17,12 @@
     <%= stylesheet_link_tag "bootstrap", "data-turbo-track": "reload" %>
     <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <% if content_for?(:importmap_tag) %>
+      <%= yield(:importmap_tag) %>
+    <% else %>
+      <%= javascript_importmap_tags 'application' %>
+    <% end %>
+
     <% if Rails.env.production? %>
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src=<%= "https://www.googletagmanager.com/gtag/js?id=#{Rails.application.credentials.google_analytics_id}" %>></script>
