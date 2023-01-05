@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   include SessionsHelper
-  def new
-  end
+  def new; end
 
   def create
     user = User.find_by(name: params[:session][:name])
-    if user && user.authenticate(params[:session][:password])
+    if user&.authenticate(params[:session][:password])
       # success login
       log_in user
       redirect_to users_path
