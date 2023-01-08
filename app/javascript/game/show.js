@@ -4,14 +4,12 @@ import "./chessboard"
 import { Chess } from './chess-0-13-4.js'
 
 function helloChess(){
-    console.log('hello chess');
     const chess = new Chess()
 
-    while (!chess.game_over()) {
-        const moves = chess.moves()
-        const move = moves[Math.floor(Math.random() * moves.length)]
-        chess.move(move)
-    }
+    const moves = $('#gameMoves').text();
+    console.log('moves');
+    console.log(moves);
+    chess.load_pgn(moves);
     console.log(chess.pgn())
 
 }
