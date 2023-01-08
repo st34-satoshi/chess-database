@@ -22,6 +22,7 @@
     <% else %>
       <%= javascript_importmap_tags 'application' %>
     <% end %>
+    <%= yield(:additional_scripts) %>
 
     <% if Rails.env.production? %>
       <!-- Global site tag (gtag.js) - Google Analytics -->

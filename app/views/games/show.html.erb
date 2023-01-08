@@ -1,3 +1,9 @@
+<% content_for :importmap_tag do %>
+    <%= javascript_importmap_tags 'game/show' %>
+<% end %>
+<% content_for :additional_scripts do %>
+  <%= stylesheet_link_tag "chessboard", "data-turbo-track": "reload" %>
+<% end %>
 <p style="color: green"><%= notice %></p>
 
 <%= render @game %>
@@ -8,3 +14,5 @@
 
   <%= button_to "Destroy this game", @game, method: :delete %>
 </div>
+
+<div id="board1" style="width: 400px"></div>
