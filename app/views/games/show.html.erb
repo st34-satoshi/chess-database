@@ -4,16 +4,33 @@
 <% content_for :additional_scripts do %>
   <%= stylesheet_link_tag "chessboard", "data-turbo-track": "reload" %>
 <% end %>
-<p style="color: green"><%= notice %></p>
+<div id="gameMoves" class="d-none"><%= @game.moves %></div>
 
-<%= render @game %>
+<table class="table">
+  <tbody>
+    <tr>
+      <td>white</td>
+      <td><%= @game.white.name %></td>
+    </tr>
+    <tr>
+      <td>black</td>
+      <td><%= @game.black.name %></td>
+    </tr>
+    <tr>
+      <td>Date</td>
+      <td><%= @game.date %></td>
+    </tr>
+  </tbody>
+</table>
 
+<% if logged_in? %>
 <div>
   <%= link_to "Edit this game", edit_game_path(@game) %> |
   <%= link_to "Back to games", games_path %>
 
   <%= button_to "Destroy this game", @game, method: :delete %>
 </div>
+<% end %>
 
 <div>
   <div id="board1" style="max-width: 400px"></div>
