@@ -15,3 +15,4 @@ pin 'record/index', preload: true
 pin 'game/show', preload: true
 pin 'game/index', preload: true
 pin 'player/index', preload: true
+pin 'player/show', preload: true
