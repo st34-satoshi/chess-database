@@ -13,3 +13,4 @@ pin 'jquery', to: 'https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js', preload:
 
 pin 'record/index', preload: true
 pin 'game/show', preload: true
+pin 'game/index', preload: true

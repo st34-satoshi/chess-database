@@ -1,14 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :importmap_tag do %>
+    <%= javascript_importmap_tags 'game/index' %>
+<% end %>
 
 <h1>Games</h1>
 
-<div id="games">
-  <% @games.each do |game| %>
-    <%= render game %>
-    <p>
-      <%= link_to "Show this game", game %>
-    </p>
-  <% end %>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">White</th>
+        <th scope="col">Black</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @games.each do |game| %>
+        <tr class="showButton" data-game-id="<%= game.id %>" data-game-path="<%= game_path(game) %>">
+          <td><%= game.white.name %></td>
+          <td><%= game.black.name %></td>
+          <td><%= game.date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <%= link_to "New game", new_game_path %>
