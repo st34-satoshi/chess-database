@@ -21,8 +21,8 @@
           <%= current_user.name %>
         </div>
         <%= link_to 'Log out', logout_path, method: "delete", data: { turbo_method: :delete } %>
-      <% else %>
-        <%= link_to 'Sign up', signup_path %>
+      <%# <% else %>
+        <%# <%= link_to 'Sign up', signup_path %>
       <% end %>
     </div>
   </div>
