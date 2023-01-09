@@ -41,6 +41,10 @@ Generate public/sitemap.xml.gz file by
 
 This file is ignored by git.
 
+### create players DB
+1. `mv lib/runner/players.tmp.csv lib/runner/players.csv`
+1. `docker-compose run web rails runner lib/runner/adder.rb`
+
 ### pry
 1. set `binding.prry`
 1. check container id: `docker ps`

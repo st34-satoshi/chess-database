@@ -38,3 +38,5 @@ public/sitemap.xml.gz
 
 */.DS_Store
 .DS_Store
+
+/lib/runner/players.csv
