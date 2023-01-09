@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   resources :games
   resources :players
   resources :users
-  resources :records, only: %i[index]
-  get '/' => 'records#index'
+  root to: 'games#index'
 
   # session
   get 'signup' => 'users#new'
