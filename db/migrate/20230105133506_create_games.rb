@@ -4,8 +4,8 @@ class CreateGames < ActiveRecord::Migration[7.0]
   # rubocop:disable Metrics/MethodLength
   def change
     create_table :games do |t|
-      t.integer :white
-      t.integer :black
+      t.integer :white_id
+      t.integer :black_id
       t.text :moves
       t.text :comment
       t.string :time

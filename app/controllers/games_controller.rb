@@ -52,6 +52,6 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:white, :black, :moves, :comment, :time, :result, :date, :move_comments)
+    params.require(:game).permit(:white_id, :black_id, :moves, :comment, :time, :result, :date, :move_comments)
   end
 end
