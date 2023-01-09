@@ -10,11 +10,11 @@
   <tbody>
     <tr>
       <td>white</td>
-      <td><%= @game.white.name %></td>
+      <td><%= link_to @game.white.name, @game.white %></td>
     </tr>
     <tr>
       <td>black</td>
-      <td><%= @game.black.name %></td>
+      <td><%= link_to @game.black.name, @game.black %></td>
     </tr>
     <tr>
       <td>Date</td>
