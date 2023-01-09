@@ -1,14 +1,30 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :importmap_tag do %>
+    <%= javascript_importmap_tags 'player/index' %>
+<% end %>
 
 <h1>Players</h1>
 
-<div id="players">
-  <% @players.each do |player| %>
-    <%= render player %>
-    <p>
-      <%= link_to "Show this player", player %>
-    </p>
-  <% end %>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Games</th>
+        <th scope="col">NCS ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @players.each do |player| %>
+        <tr class="<%= player.games.size > 0 ? 'showButton' : '' %>" style="<%= player.games.size > 0 ? 'cursor: pointer' : '' %>" data-player-path="<%= player_path(player) %>">
+          <td><%= player.name %></td>
+          <td><%= player.games.size %></td>
+          <td><%= player.ncs_id %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
+<% if logged_in? %>
 <%= link_to "New player", new_player_path %>
+<% end %>
