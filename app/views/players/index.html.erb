@@ -9,15 +9,13 @@
     <thead>
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Games</th>
         <th scope="col">NCS ID</th>
       </tr>
     </thead>
     <tbody>
       <% @players.each do |player| %>
-        <tr class="<%= player.games.size > 0 ? 'showButton' : '' %>" style="<%= player.games.size > 0 ? 'cursor: pointer' : '' %>" data-player-path="<%= player_path(player) %>">
+        <tr class="showButton" style="cursor: pointer;" data-player-path="<%= player_path(player) %>">
           <td><%= player.name %></td>
-          <td><%= player.games.size %></td>
           <td><%= player.ncs_id %></td>
         </tr>
       <% end %>
