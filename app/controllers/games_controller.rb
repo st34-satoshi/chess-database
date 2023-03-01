@@ -11,6 +11,8 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
+    @players = Player.all
+    @player_hash = Player.name_id_hash
   end
 
   def edit; end

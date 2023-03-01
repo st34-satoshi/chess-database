@@ -12,4 +12,12 @@ class Player < ApplicationRecord
     white_games + black_games
   end
 
+  def self.name_id_hash
+    h = {}
+    Player.all.each do |player|
+      h[player.name] = player.id
+    end
+    h
+  end
+
 end
