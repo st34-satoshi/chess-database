@@ -38,24 +38,11 @@
   </div>
 
   <div>
-    <%= form.label :moves, style: "display: block" %>
-    <%= form.text_area :moves %>
-  </div>
-
-  <div>
-    <%= form.label :comment, style: "display: block" %>
-    <%= form.text_area :comment %>
-  </div>
-
-  <div>
-    <%= form.label :time, style: "display: block" %>
-    <%= form.text_field :time %>
-  </div>
-
-  <div>
     <%= form.label :result, style: "display: block" %>
-    <%= form.text_field :result %>
+    <%= form.select :result, ["White Win", "Black Win", "Draw", "Unknown"] %>
   </div>
+
+  <%# TOOD: time %>
 
   <div>
     <%= form.label :date, style: "display: block" %>
@@ -63,8 +50,8 @@
   </div>
 
   <div>
-    <%= form.label :move_comments, style: "display: block" %>
-    <%= form.text_area :move_comments %>
+    <%= form.label :moves, style: "display: block" %>
+    <%= form.text_area :moves %>
   </div>
 
   <div>
