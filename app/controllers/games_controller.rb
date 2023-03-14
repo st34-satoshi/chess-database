@@ -27,6 +27,8 @@ class GamesController < ApplicationController
       if @game.save
         format.html { redirect_to game_url(@game), notice: 'Game was successfully created.' }
       else
+        @players = Player.all
+        @player_hash = Player.name_id_hash
         format.html { render :new, status: :unprocessable_entity }
       end
     end
