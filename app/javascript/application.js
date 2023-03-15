@@ -5,7 +5,3 @@ import "bootstrap"
 
 import jQuery from "jquery";
 window.$ = window.jQuery = jQuery;
-
-// $(function() {
-//     console.log("Hello Rails7!");
-// })
