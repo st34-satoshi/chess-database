@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:session][:password])
       # success login
       log_in user
-      redirect_to users_path
+      redirect_to root_path
     else
       # fail login
       flash.now[:alert] = 'Invalid name/password combination' # TODO: fix, show alert

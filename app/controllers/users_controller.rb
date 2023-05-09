@@ -19,13 +19,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
-      if @user.save
-        log_in @user
-        format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @user.save
+      log_in @user
+      flash[:success] = "ユーザーを作成しました"
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
