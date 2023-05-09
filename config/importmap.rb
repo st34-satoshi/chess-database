@@ -16,6 +16,7 @@ pin 'game/show', preload: true
 pin 'game/index', preload: true
 pin 'game/new', preload: true
 pin 'game/chessboard', preload: true
+pin 'game/chessboard2', preload: true
 pin 'game/chess-0-13-4', preload: true
 pin 'player/index', preload: true
 pin 'player/show', preload: true
