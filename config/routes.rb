@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   resources :games
   resources :players
-  resources :users
+  resources :users, except: [:show]
   root to: 'games#index'
 
   # session
