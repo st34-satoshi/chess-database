@@ -12,8 +12,8 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       # fail login
-      flash.now[:alert] = 'Invalid name/password combination' # TODO: fix, show alert
-      render 'new'
+      flash.now[:danger] = 'Invalid name/password combination'
+      render 'new', status: :unauthorized
     end
   end
 
