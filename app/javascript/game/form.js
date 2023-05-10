@@ -33,30 +33,30 @@ export function SetOnChange(){
 }
 
 function onDragStart (params) {
-  // do not pick up pieces if the game is over
-  const piece = params.piece;
-  if (game.game_over()) return false
+    // do not pick up pieces if the game is over
+    const piece = params.piece;
+    if (game.game_over()) return false
 
-  // only pick up pieces for the side to move
-  if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
-    return false
-  }
+    // only pick up pieces for the side to move
+    if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+        (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+        return false
+    }
 }
 
 function onDrop (params) {
-  // see if the move is legal
-  const move = game.move({
-    from: params.source,
-    to: params.target,
-    promotion: 'q' // NOTE: always promote to a queen for example simplicity
-  })
+    // see if the move is legal
+    const move = game.move({
+        from: params.source,
+        to: params.target,
+        promotion: 'q' // NOTE: always promote to a queen for example simplicity
+    })
 
-  // illegal move
-  if (move === null) return 'snapback'
+    // illegal move
+    if (move === null) return 'snapback'
 
-  ChessBoard.position(game.fen())
-  $('#game_moves').val(game.pgn());
+    ChessBoard.position(game.fen())
+    $('#game_moves').val(game.pgn());
 }
 
 function setUndoButton(){
