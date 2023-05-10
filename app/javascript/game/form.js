@@ -32,19 +32,6 @@ export function SetOnChange(){
     });
 }
 
-$(function() {
-    NameDict = $('#white-name-list').data('user-id-table')
-
-    const config = {
-      draggable: true,
-      dropOffBoard: 'snapback',
-      position: 'start',
-      onDragStart,
-      onDrop
-    }
-    ChessBoard = Chessboard2('inputBoard', config);
-})
-
 function onDragStart (params) {
   // do not pick up pieces if the game is over
   const piece = params.piece;
@@ -71,3 +58,26 @@ function onDrop (params) {
   ChessBoard.position(game.fen())
   $('#game_moves').val(game.pgn());
 }
+
+function setUndoButton(){
+    $('#undoButton').click(function() {
+        console.log('undo button');
+        game.undo();
+        ChessBoard.position(game.fen())
+        $('#game_moves').val(game.pgn());
+    });
+}
+
+$(function() {
+    NameDict = $('#white-name-list').data('user-id-table')
+
+    const config = {
+      draggable: true,
+      dropOffBoard: 'snapback',
+      position: 'start',
+      onDragStart,
+      onDrop
+    }
+    ChessBoard = Chessboard2('inputBoard', config);
+    setUndoButton();
+})
