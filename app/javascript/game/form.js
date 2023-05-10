@@ -69,5 +69,5 @@ function onDrop (params) {
   if (move === null) return 'snapback'
 
   ChessBoard.position(game.fen())
-  // TODO: update moves text
+  $('#game_moves').val(game.pgn());
 }
