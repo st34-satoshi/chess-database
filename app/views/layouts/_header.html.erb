@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-        <%= image_tag('/white_king.png', {:type => 'image/png', :size => '10x20'}) %>
-        Home
-    </a>
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag('/white_king.png', {:type => 'image/png', :size => '10x20'}) %>
+      Home
+    <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
