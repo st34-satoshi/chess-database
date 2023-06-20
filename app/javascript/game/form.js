@@ -61,10 +61,15 @@ function onDrop (params) {
 
 function setUndoButton(){
     $('#undoButton').click(function() {
-        console.log('undo button');
         game.undo();
         ChessBoard.position(game.fen())
         $('#game_moves').val(game.pgn());
+    });
+}
+
+function setFlipBoardButton(){
+    $('#flipBoardButton').click(function() {
+        ChessBoard.flip()
     });
 }
 
@@ -80,4 +85,5 @@ $(function() {
     }
     ChessBoard = Chessboard2('inputBoard', config);
     setUndoButton();
+    setFlipBoardButton();
 })
