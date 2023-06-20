@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destory'
+  # google auth
+  post '/google_login_api/callback', to: 'sessions#google_auth_callback'
 end
