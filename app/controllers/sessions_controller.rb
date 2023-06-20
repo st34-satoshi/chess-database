@@ -28,16 +28,23 @@ class SessionsController < ApplicationController
   def google_auth_callback
     # verify_g_csrf_token
     if cookies["g_csrf_token"].blank? || params[:g_csrf_token].blank? || cookies["g_csrf_token"] != params[:g_csrf_token]
-      redirect_to login_path, notice: 'ログインに失敗しました。'
+      flash[:danger] = "ログインに失敗しました"
+      redirect_to login_path
       return
     end
 
     payload = Google::Auth::IDTokens.verify_oidc(params[:credential], aud: Rails.application.config.google_auth_client_id)
-    # TODO: 実装する
-    # binding.pry
-    redirect_to login_path, notice: 'ログインに失敗しました。'
-    # user = User.find_or_create_by(email: payload['email'])
-    # session[:user_id] = user.id
-    # redirect_to after_login_path, notice: 'ログインしました'
+    user = User.find_or_create_by(email: payload['email']) do |user|
+      user.g_name = payload['name']
+      user.password = SecureRandom.hex(10) # password is required but notused. So random string is OK.
+    end
+    unless user.save
+      flash[:danger] = "ログインに失敗しました"
+      redirect_to login_path
+      return
+    end
+    log_in user
+    flash[:success] = "ログインしました"
+    redirect_to games_path
   end
 end
