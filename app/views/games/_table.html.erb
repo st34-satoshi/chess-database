@@ -11,9 +11,17 @@
     <tbody>
       <% games.each do |game| %>
         <tr class="showButton" style="cursor: pointer" data-game-path="<%= game_path(game) %>">
-          <td><%= game.white.name %></td>
-          <td><%= game.black.name %></td>
-          <td><%= game.date %></td>
+          <td>
+            <div class="<%= "text-success" if game.white_win? %>">
+              <%= game.white.name %>
+            </div>
+          </td>
+          <td>
+            <div class="<%= "text-success" if game.black_win? %>">
+              <%= game.black.name %>
+            </div>
+          </td>
+          <td><%= game.date&.strftime("%y/%-m/%-d")  %></td>
         </tr>
       <% end %>
     </tbody>
