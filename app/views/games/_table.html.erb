@@ -1,5 +1,8 @@
 
 <div>
+  <div>
+    <span class="text-success ms-1">Win</span><span class="text-danger ms-1">Lose</span><span class="ms-1">Draw</span>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -12,12 +15,20 @@
       <% games.each do |game| %>
         <tr class="showButton" style="cursor: pointer" data-game-path="<%= game_path(game) %>">
           <td>
-            <div class="<%= "text-success" if game.white_win? %>">
+            <% color = "" %>
+            <% color = "text-success" if game.white_win? %>
+            <% color = "text-danger" if game.black_win? %>
+            <% color = "text-muted" if game.unknown? %>
+            <div class="<%= color %>">
               <%= game.white.name %>
             </div>
           </td>
           <td>
-            <div class="<%= "text-success" if game.black_win? %>">
+            <% color = "" %>
+            <% color = "text-success" if game.black_win? %>
+            <% color = "text-danger" if game.white_win? %>
+            <% color = "text-muted" if game.unknown? %>
+            <div class="<%= color %>">
               <%= game.black.name %>
             </div>
           </td>

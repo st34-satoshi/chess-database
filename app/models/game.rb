@@ -15,4 +15,8 @@ class Game < ApplicationRecord
   def draw?
     result == "Draw"
   end
+
+  def unknown?
+    result == "Unknown"
+  end
 end
