@@ -16,7 +16,7 @@
   </div>
   <div>
     <%= form.label :white_name, style: "display: block" %>
-    <%= form.text_field :white_name, id: :white_name_input, list: 'white-name-list' %>
+    <%= form.text_field :white_name, id: :white_name_input, list: 'white-name-list', value: "#{game&.white&.name}" %>
     <datalist id="white-name-list" data-user-id-table='<%= @player_hash.to_json %>'>
       <% @players.each_with_index do |player, i|%>
         <option value="<%= player.name %>" id="white-name-option-<%= player.name.strip %>" data-id="<%= i+1 %>">
@@ -29,7 +29,7 @@
   </div>
   <div>
     <%= form.label :black_name, style: "display: block" %>
-    <%= form.text_field :black_name, id: :black_name_input, list: 'black-name-list' %>
+    <%= form.text_field :black_name, id: :black_name_input, list: 'black-name-list', value: "#{game&.black&.name}" %>
     <datalist id="black-name-list">
       <% @players.each_with_index do |player, i|%>
         <option value="<%= player.name %>" id="black-name-option-<%= player.name.strip %>" data-id="<%= i+1 %>">
