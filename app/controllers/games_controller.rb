@@ -35,12 +35,11 @@ class GamesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @game.update(game_params)
-        format.html { redirect_to game_url(@game), notice: 'Game was successfully updated.' }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @game.update(game_params)
+      flash[:success] = 'Game was successfully updated.'
+      redirect_to game_path(@game)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
