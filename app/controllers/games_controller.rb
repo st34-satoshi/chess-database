@@ -2,6 +2,7 @@
 
 class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy]
+  before_action :current_user, only: %i[new]
 
   def index
     @games = Game.all.order(date: :desc)
@@ -10,7 +11,11 @@ class GamesController < ApplicationController
   def show; end
 
   def new
-    @game = Game.new
+    if @current_user
+      @game = @current_user.games.new
+    else
+      @game = Game.new
+    end
     @players = Player.all
     @player_hash = Player.name_id_hash
   end
@@ -58,6 +63,6 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:white_id, :black_id, :moves, :comment, :time, :result, :date, :move_comments)
+    params.require(:game).permit(:white_id, :black_id, :moves, :comment, :time, :result, :date, :move_comments, :user_id)
   end
 end
