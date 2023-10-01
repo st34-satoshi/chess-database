@@ -43,10 +43,14 @@
 
 <% if logged_in? %>
 <div>
-  <%= link_to "Edit this game", edit_game_path(@game) %> |
+  <% if current_user.id == @game.user&.id %>
+    <%= link_to "Edit this game", edit_game_path(@game) %> |
+  <% end %>
   <%= link_to "Back to games", games_path %>
 
-  <%= button_to "Destroy this game", @game, method: :delete %>
+  <% if current_user.id == @game.user&.id %>
+    <%= button_to "Destroy this game", @game, method: :delete %>
+  <% end %>
 </div>
 <% end %>
 
