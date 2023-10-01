@@ -7,6 +7,7 @@ Web site. Save chess games.
 ## Get Started
 - `docker-compose build`
 - `docker-compose run web rails db:create`
+- `docker-compose run web rails db:migrate`
 - `docker-compose up`
 - `open http://localhost:3001`
 
