@@ -5,8 +5,8 @@ class Player < ApplicationRecord
   validates :ncs_id, uniqueness: true, allow_nil: true, allow_blank: true
   validates :fide_id, uniqueness: true, allow_nil: true, allow_blank: true
 
-  has_many :white_games, class_name: "Game", foreign_key: "white_id", dependent: :restrict_with_error
-  has_many :black_games, class_name: "Game", foreign_key: "black_id", dependent: :restrict_with_error
+  has_many :white_games, class_name: 'Game', foreign_key: 'white_id', dependent: :restrict_with_error
+  has_many :black_games, class_name: 'Game', foreign_key: 'black_id', dependent: :restrict_with_error
 
   def games
     white_games + black_games
@@ -19,5 +19,4 @@ class Player < ApplicationRecord
     end
     h
   end
-
 end

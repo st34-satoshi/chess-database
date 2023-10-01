@@ -11,11 +11,11 @@ class GamesController < ApplicationController
   def show; end
 
   def new
-    if @current_user
-      @game = @current_user.games.new
-    else
-      @game = Game.new
-    end
+    @game = if @current_user
+              @current_user.games.new
+            else
+              Game.new
+            end
     @players = Player.all
     @player_hash = Player.name_id_hash
   end
@@ -63,6 +63,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:white_id, :black_id, :moves, :comment, :time, :result, :date, :move_comments, :user_id)
+    params.require(:game).permit(:white_id, :black_id, :moves, :comment, :time, :result, :date, :move_comments,
+                                 :user_id)
   end
 end

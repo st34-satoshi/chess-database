@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in @user
-      flash[:success] = "ユーザーを作成しました"
+      flash[:success] = 'ユーザーを作成しました'
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity

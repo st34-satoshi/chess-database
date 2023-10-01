@@ -69,7 +69,7 @@ group :test do
 end
 
 # added by me
+gem 'googleauth'
 gem 'pry-rails'
 gem 'public_uid'
 gem 'sitemap_generator'
-gem 'googleauth'

@@ -7,3 +7,9 @@ AllCops:
   Exclude:
     - bin/bundle
     - db/schema.rb
+Metrics/AbcSize:
+  Max: 40
+Metrics/MethodLength:
+  Max: 20
+Layout/LineLength:
+  Max: 150
