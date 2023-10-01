@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   resources :games
   resources :players
-  resources :users, only: [:index, :new, :create]
+  resources :users, only: %i[index new create]
   root to: 'games#index'
 
   # session

@@ -1,3 +1,6 @@
+<% content_for :importmap_tag do %>
+  <%= javascript_importmap_tags 'game/edit' %>
+<% end %>
 <h1>Editing game</h1>
 
 <%= render "form", game: @game %>

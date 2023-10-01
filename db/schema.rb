@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_20_140136) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_01_073615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_140136) do
     t.text "move_comments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -45,4 +47,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_140136) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
+  add_foreign_key "games", "users"
 end

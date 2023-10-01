@@ -20,7 +20,7 @@
         <div class="me-1">
           <%= current_user.name %>
         </div>
-        <%= link_to 'Log out', logout_path, method: "delete", data: { turbo_method: :delete } %>
+        <%= button_to 'Log out', logout_path, method: :delete, class: "btn-none link-primary" %>
       <% else %>
         <%= link_to 'Login', login_path %>
       <% end %>

@@ -2,6 +2,7 @@
 
 class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy]
+  before_action :current_user, only: %i[new]
 
   def index
     @games = Game.all.order(date: :desc)
@@ -10,7 +11,11 @@ class GamesController < ApplicationController
   def show; end
 
   def new
-    @game = Game.new
+    @game = if @current_user
+              @current_user.games.new
+            else
+              Game.new
+            end
     @players = Player.all
     @player_hash = Player.name_id_hash
   end
@@ -35,12 +40,11 @@ class GamesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @game.update(game_params)
-        format.html { redirect_to game_url(@game), notice: 'Game was successfully updated.' }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @game.update(game_params)
+      flash[:success] = 'Game was successfully updated.'
+      redirect_to game_path(@game)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -59,6 +63,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:white_id, :black_id, :moves, :comment, :time, :result, :date, :move_comments)
+    params.require(:game).permit(:white_id, :black_id, :moves, :comment, :time, :result, :date, :move_comments,
+                                 :user_id)
   end
 end
