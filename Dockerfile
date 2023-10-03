@@ -1,12 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM ruby:3.1.3
 
-# for installing yarn
-RUN curl https://deb.nodesource.com/setup_12.x | bash
-RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-RUN apt-get update -qq && apt-get install -y nodejs yarn postgresql-client vim
+RUN apt-get update -qq && apt-get install -y postgresql-client vim
 
 WORKDIR /chess_database
 COPY Gemfile /chess_database/Gemfile
