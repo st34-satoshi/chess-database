@@ -43,8 +43,14 @@ Generate public/sitemap.xml.gz file by
 This file is ignored by git.
 
 ### create players DB
+from chess ranking site
+`docker-compose run web rake player:fetch_players`
+
+or from csv file
+
 1. `mv lib/runner/players.tmp.csv lib/runner/players.csv`
 1. `docker-compose run web rails runner lib/runner/adder.rb`
+
 
 ### pry
 1. set `binding.pry`
