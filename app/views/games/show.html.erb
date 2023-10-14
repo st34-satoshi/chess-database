@@ -55,6 +55,13 @@
 <% end %>
 
 <div>
+  <div style="max-width: 400px">
+    <div id="analysisBar" class="progress border">
+      <div class="progress-bar bg-white text-dark" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+      <div class="progress-bar bg-dark" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+    </div>
+    <div id="analysisNext">next: </div>
+  </div>
   <div id="board1" style="max-width: 400px"></div>
   <button type="button" class="btn" id="buttonBoardBigPrevious"><i class="fas fa-fast-backward"></i></button>
   <button type="button" class="btn" id="buttonBoardPrevious"><i class="fas fa-step-backward"></i></button>
