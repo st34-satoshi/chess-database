@@ -52,8 +52,15 @@ function setBoardNextButtons(){
     });
 }
 
+function setBoardFlipButton(){
+    $('#buttonBoardFlip').click(function() {
+        CHESS_BOARD.flip();
+    });
+}
+
 $(function() {
     var board1 = Chessboard('board1', 'start');
     initializeChessBoard(board1);
     setBoardNextButtons();
+    setBoardFlipButton();
 })
