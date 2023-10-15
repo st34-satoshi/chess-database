@@ -59,7 +59,8 @@ class GamesController < ApplicationController
   private
 
   def set_game
-    @game = Game.find(params[:id])
+    @game = Game.find_by(public_uid: params[:id])
+    raise ActionController::RoutingError.new('Not Found') if @game.nil?
   end
 
   def game_params

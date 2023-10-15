@@ -5,6 +5,8 @@ class Game < ApplicationRecord
   belongs_to :black, class_name: 'Player', foreign_key: 'black_id'
   belongs_to :user, optional: true
 
+  before_create -> { self.public_uid = generate_public_uid }
+
   def white_win?
     result == 'White Win'
   end
@@ -19,5 +21,13 @@ class Game < ApplicationRecord
 
   def unknown?
     result == 'Unknown'
+  end
+
+  def to_param
+    public_uid
+  end
+
+  def generate_public_uid
+    SecureRandom.alphanumeric(10) # A-Z, a-z, 0-9. 62^10=6*10^17 patterns
   end
 end
