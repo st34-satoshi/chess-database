@@ -71,4 +71,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.google_auth_client_id = Rails.application.credentials.google[:client_id]
+  config.engine_api_path = "http://localhost:3010"
 end

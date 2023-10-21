@@ -34,6 +34,39 @@ function movePositionAt(i){
         chess.move(history[i]);
     }
     CHESS_BOARD.position(chess.fen());
+    // update value asynchronously
+    updateValueBar(chess);
+}
+
+async function updateValueBar(chess){
+    const chessHistory = chess.history({verbose: true})
+    const moves = [] // ["e2e4", "e7e5"]
+    for(let i=0;i<chessHistory.length;i++){
+        moves.push(chessHistory[i].lan)
+    }
+    const movesStr = moves.join(' ')
+
+    // fetch ai value and best move
+    const url = `${getEngineApiPath()}/analysis`
+    const data = {moves: movesStr}
+    const response = await fetch(url, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
+      });
+    // TODO: update value bar
+    console.log(response)
+}
+
+function getEngineApiPath(){
+    const d = document.getElementById("engineApiPath")
+    return d.dataset.path
+
 }
 
 function setBoardNextButtons(){

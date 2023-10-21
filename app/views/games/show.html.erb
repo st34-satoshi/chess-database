@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag "chessboard" %>
 <% end %>
 <div id="gameMoves" class="d-none"><%= @game.moves %></div>
+<div id="engineApiPath" class="d-none" data-path="<%= Rails.application.config.engine_api_path %>"></div>
 
 <table class="table">
   <tbody>
