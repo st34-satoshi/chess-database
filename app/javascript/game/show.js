@@ -1,7 +1,6 @@
 import "application"
 import "./chessboard"
-// import "./chess"
-import { Chess } from './chess-0-13-4.js'
+import { Chess } from './chess-1-0-0beta-6'
 
 let CURRENT_BOARD_INDEX = 0;
 let CHESS = null;
@@ -17,7 +16,7 @@ function setCurrentBoardIndex(i){
 function initializeChessBoard(board){
     const chess = new Chess()
     const moves = $('#gameMoves').text();
-    chess.load_pgn(moves);
+    chess.loadPgn(moves);
     const history = chess.history();
     CHESS_HISTORY = history;
     CHESS = chess;
