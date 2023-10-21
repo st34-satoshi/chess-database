@@ -90,6 +90,8 @@ async function updateValueBar(chess){
     }
     updateValueBarDiv(whiteBar, whiteDisplayValue, whitePercentage)
     updateValueBarDiv(blackBar, blackDisplayValue, blackPercentage)
+    const bestMoveDiv = document.getElementById("analysisNext")
+    bestMoveDiv.innerText = `best: ${bestMove}`
 }
 
 function updateValueBarDiv(div, value, percentage){
@@ -101,7 +103,6 @@ function updateValueBarDiv(div, value, percentage){
 function getEngineApiPath(){
     const d = document.getElementById("engineApiPath")
     return d.dataset.path
-
 }
 
 function setBoardNextButtons(){
