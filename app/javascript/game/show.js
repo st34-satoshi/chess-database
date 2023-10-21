@@ -48,8 +48,9 @@ async function updateValueBar(chess){
 
     // fetch ai value and best move
     const url = `${getEngineApiPath()}/analysis`
-    const data = {moves: movesStr}
-    const response = await fetch(url, {
+    const paramsObj = {moves: movesStr}
+    const searchParams = new URLSearchParams(paramsObj)
+    const response = await fetch(url+"?"+searchParams, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -57,10 +58,44 @@ async function updateValueBar(chess){
           "Content-Type": "application/json",
         },
         referrerPolicy: "no-referrer",
-        body: JSON.stringify(data),
       });
-    // TODO: update value bar
-    console.log(response)
+
+    const result = await response.json()
+    let bestMove = ''
+    let whiteValue = 0
+    if(result.message === 'ok'){
+        bestMove = result.best_move
+        const score = result.score
+        if(moves.length % 2 === 1){
+            whiteValue = -1 * score
+        }else{
+            whiteValue = score
+        }
+    }
+
+    // update value bar element
+    // plus 100 is plus 5%
+    let whitePercentage = 50 + whiteValue * 0.05
+    whitePercentage = Math.max(0, whitePercentage)
+    whitePercentage = Math.min(100, whitePercentage)
+    const blackPercentage = 100 - whitePercentage
+    const whiteBar = document.getElementById("valueBarWhite")
+    const blackBar = document.getElementById("valueBarBlack")
+    let whiteDisplayValue = ''
+    let blackDisplayValue = ''
+    if(whiteValue > 0){
+        whiteDisplayValue = whiteValue
+    }else{
+        blackDisplayValue = -1 * whiteValue
+    }
+    updateValueBarDiv(whiteBar, whiteDisplayValue, whitePercentage)
+    updateValueBarDiv(blackBar, blackDisplayValue, blackPercentage)
+}
+
+function updateValueBarDiv(div, value, percentage){
+    div.setAttribute("aria-valuenow", `${percentage}`);
+    div.style.width = `${percentage}%`
+    div.innerText = value
 }
 
 function getEngineApiPath(){
