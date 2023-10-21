@@ -7,6 +7,8 @@ let CHESS = null;
 let CHESS_BOARD = null;
 let CHESS_HISTORY = null;
 
+const EngineResult = {}; // {"movesStr": {"bestMove": "e2e4", "whiteValue": 26}}
+
 function setCurrentBoardIndex(i){
     i = Math.max(0, i);
     i = Math.min(CHESS_HISTORY.length, i);
@@ -46,31 +48,37 @@ async function updateValueBar(chess){
     }
     const movesStr = moves.join(' ')
 
-    // fetch ai value and best move
-    const url = `${getEngineApiPath()}/analysis`
-    const paramsObj = {moves: movesStr}
-    const searchParams = new URLSearchParams(paramsObj)
-    const response = await fetch(url+"?"+searchParams, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        referrerPolicy: "no-referrer",
-      });
-
-    const result = await response.json()
     let bestMove = ''
     let whiteValue = 0
-    if(result.message === 'ok'){
-        bestMove = result.best_move
-        const score = result.score
-        if(moves.length % 2 === 1){
-            whiteValue = -1 * score
-        }else{
-            whiteValue = score
+    if(movesStr in EngineResult){
+        bestMove = EngineResult[movesStr]['bestMove']
+        whiteValue = EngineResult[movesStr]['whiteValue']
+    }else{
+        // fetch ai value and best move
+        const url = `${getEngineApiPath()}/analysis`
+        const paramsObj = {moves: movesStr}
+        const searchParams = new URLSearchParams(paramsObj)
+        const response = await fetch(url+"?"+searchParams, {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            referrerPolicy: "no-referrer",
+          });
+
+        const result = await response.json()
+        if(result.message === 'ok'){
+            bestMove = result.best_move
+            const score = result.score
+            if(moves.length % 2 === 1){
+                whiteValue = -1 * score
+            }else{
+                whiteValue = score
+            }
         }
+        EngineResult[movesStr] = {"bestMove": bestMove, "whiteValue": whiteValue}
     }
 
     // update value bar element
