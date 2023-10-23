@@ -6,6 +6,7 @@ let CURRENT_BOARD_INDEX = 0;
 let CHESS = null;
 let CHESS_BOARD = null;
 let CHESS_HISTORY = null;
+let CHESS_COMMENTS = null;
 
 const EngineResult = {}; // {"movesStr": {"bestMove": "e2e4", "whiteValue": 26}}
 
@@ -19,8 +20,9 @@ function initializeChessBoard(board){
     const chess = new Chess()
     const moves = $('#gameMoves').text();
     chess.loadPgn(moves);
-    const history = chess.history();
+    const history = chess.history({ verbose: true });
     CHESS_HISTORY = history;
+    CHESS_COMMENTS = chess.getComments();
     CHESS = chess;
     CHESS_BOARD = board;
     movePositionAt(history.length);
@@ -36,8 +38,20 @@ function movePositionAt(i){
         chess.move(history[i]);
     }
     CHESS_BOARD.position(chess.fen());
-    // update value asynchronously
-    updateValueBar(chess);
+    updateValueBar(chess); // update value asynchronously
+    updateComment(chess);
+}
+
+function updateComment(chess){
+    const commentDiv = document.getElementById("commentOnCurrentMove")
+    const fen = chess.fen()
+    for(const comment of CHESS_COMMENTS){
+        if(fen === comment.fen){
+            commentDiv.innerHTML = comment.comment
+            return;
+        }
+    }
+    commentDiv.innerHTML = '<span class="text-muted">No comment on this move</span>'
 }
 
 async function updateValueBar(chess){

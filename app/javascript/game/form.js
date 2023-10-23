@@ -3,13 +3,13 @@
  */
 
 import "./chessboard2"
-import { Chess } from './chess-0-13-4.js'
+import { Chess } from './chess-1-0-0beta-6'
 
 let NameDict = null;
 let ChessBoard = null;
 const game = new Chess()
 
-export function SetOnChange(){
+function setOnChange(){
     $('#white_name_input').on('change', function () {
         // get selected user id
         const name = $(this).val()
@@ -35,7 +35,7 @@ export function SetOnChange(){
 function onDragStart (params) {
     // do not pick up pieces if the game is over
     const piece = params.piece;
-    if (game.game_over()) return false
+    if (game.isGameOver()) return false
 
     // only pick up pieces for the side to move
     if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
@@ -44,7 +44,20 @@ function onDragStart (params) {
     }
 }
 
-function onDrop (params) {
+function updateBoardPosition(){
+    ChessBoard.position(game.fen())
+    $('#game_moves').val(game.pgn());
+    // show comment
+    const commentElement = document.getElementById('commentOnCurrentMove')
+    const gameComment = game.getComment()
+    if(gameComment === undefined){
+        commentElement.value = ''
+    }else{
+        commentElement.value = gameComment
+    }
+}
+
+function onDrop(params) {
     // see if the move is legal
     const move = game.move({
         from: params.source,
@@ -55,15 +68,13 @@ function onDrop (params) {
     // illegal move
     if (move === null) return 'snapback'
 
-    ChessBoard.position(game.fen())
-    $('#game_moves').val(game.pgn());
+    updateBoardPosition()
 }
 
 function setUndoButton(){
     $('#undoButton').click(function() {
         game.undo();
-        ChessBoard.position(game.fen())
-        $('#game_moves').val(game.pgn());
+        updateBoardPosition()
     });
 }
 
@@ -73,7 +84,16 @@ function setFlipBoardButton(){
     });
 }
 
+function setAddCommentEvent(){
+    const comment = document.getElementById('commentOnCurrentMove')
+    comment.addEventListener("input", (event) => {
+        const text = event.target.value
+        game.setComment(text)
+    })
+}
+
 $(function() {
+    setOnChange()
     NameDict = $('#white-name-list').data('user-id-table')
 
     const config = {
@@ -86,4 +106,5 @@ $(function() {
     ChessBoard = Chessboard2('inputBoard', config);
     setUndoButton();
     setFlipBoardButton();
+    setAddCommentEvent();
 })
