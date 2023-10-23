@@ -94,4 +94,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.google_auth_client_id = Rails.application.credentials.google[:client_id]
+  config.engine_api_path = "https://stockfish-api.stu345.com"
 end
