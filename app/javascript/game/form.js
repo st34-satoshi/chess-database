@@ -73,6 +73,18 @@ function setFlipBoardButton(){
     });
 }
 
+function setAddCommentEvent(){
+    const comment = document.getElementById('commentOnCurrentMove')
+    comment.addEventListener("change", (event) => {
+        console.log('change event')
+        const text = event.target.value
+        console.log(text)
+        game.setComment(text)
+        console.log('set comment to chess js')
+    })
+
+}
+
 $(function() {
     NameDict = $('#white-name-list').data('user-id-table')
 
@@ -86,4 +98,5 @@ $(function() {
     ChessBoard = Chessboard2('inputBoard', config);
     setUndoButton();
     setFlipBoardButton();
+    setAddCommentEvent();
 })
