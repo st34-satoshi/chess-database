@@ -3,7 +3,7 @@
  */
 
 import "./chessboard2"
-import { Chess } from './chess-0-13-4.js'
+import { Chess } from './chess-1-0-0beta-6'
 
 let NameDict = null;
 let ChessBoard = null;
@@ -35,7 +35,7 @@ export function SetOnChange(){
 function onDragStart (params) {
     // do not pick up pieces if the game is over
     const piece = params.piece;
-    if (game.game_over()) return false
+    if (game.isGameOver()) return false
 
     // only pick up pieces for the side to move
     if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
