@@ -51,18 +51,18 @@
     <%= form.date_field :date %>
   </div>
 
-
   <div>
     <div id="inputBoard" style="max-width: 400px"></div>
     <button type="button" class="btn btn-outline-secondary mt-1" id="undoButton">Undo</button>
     <button type="button" class="btn btn-outline-secondary mt-1" id="flipBoardButton">Flip</button>
   </div>
+
   <div>
     <%= form.label :moves, style: "display: block" %>
     <%= form.text_area :moves %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Create", class: "btn btn-primary" %>
   </div>
 <% end %>
