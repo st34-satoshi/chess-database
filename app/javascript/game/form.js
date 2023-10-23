@@ -90,7 +90,6 @@ function setAddCommentEvent(){
         const text = event.target.value
         game.setComment(text)
     })
-
 }
 
 $(function() {
