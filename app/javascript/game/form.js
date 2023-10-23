@@ -9,7 +9,7 @@ let NameDict = null;
 let ChessBoard = null;
 const game = new Chess()
 
-export function SetOnChange(){
+function setOnChange(){
     $('#white_name_input').on('change', function () {
         // get selected user id
         const name = $(this).val()
@@ -44,7 +44,20 @@ function onDragStart (params) {
     }
 }
 
-function onDrop (params) {
+function updateBoardPosition(){
+    ChessBoard.position(game.fen())
+    $('#game_moves').val(game.pgn());
+    // show comment
+    const commentElement = document.getElementById('commentOnCurrentMove')
+    const gameComment = game.getComment()
+    if(gameComment === undefined){
+        commentElement.value = ''
+    }else{
+        commentElement.value = gameComment
+    }
+}
+
+function onDrop(params) {
     // see if the move is legal
     const move = game.move({
         from: params.source,
@@ -55,15 +68,13 @@ function onDrop (params) {
     // illegal move
     if (move === null) return 'snapback'
 
-    ChessBoard.position(game.fen())
-    $('#game_moves').val(game.pgn());
+    updateBoardPosition()
 }
 
 function setUndoButton(){
     $('#undoButton').click(function() {
         game.undo();
-        ChessBoard.position(game.fen())
-        $('#game_moves').val(game.pgn());
+        updateBoardPosition()
     });
 }
 
@@ -75,17 +86,15 @@ function setFlipBoardButton(){
 
 function setAddCommentEvent(){
     const comment = document.getElementById('commentOnCurrentMove')
-    comment.addEventListener("change", (event) => {
-        console.log('change event')
+    comment.addEventListener("input", (event) => {
         const text = event.target.value
-        console.log(text)
         game.setComment(text)
-        console.log('set comment to chess js')
     })
 
 }
 
 $(function() {
+    setOnChange()
     NameDict = $('#white-name-list').data('user-id-table')
 
     const config = {
