@@ -3,6 +3,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy]
   before_action :current_user, only: %i[new]
+  after_action :allow_iframe, only: %i[show]
 
   def index
     @games = Game.all.order(date: :desc)
