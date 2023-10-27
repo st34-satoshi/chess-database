@@ -113,7 +113,7 @@ async function updateValueBar(chess){
     updateValueBarDiv(whiteBar, whiteDisplayValue, whitePercentage)
     updateValueBarDiv(blackBar, blackDisplayValue, blackPercentage)
     const bestMoveDiv = document.getElementById("analysisNext")
-    bestMoveDiv.innerText = `best: ${bestMove}`
+    bestMoveDiv.innerText = `${bestMove}`
 }
 
 function updateValueBarDiv(div, value, percentage){
