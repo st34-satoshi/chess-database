@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[show edit update destroy]
+  before_action :set_game, only: %i[show edit update destroy iframe]
   before_action :current_user, only: %i[new]
-  after_action :allow_iframe, only: %i[show]
+  after_action :allow_iframe, only: %i[iframe]
 
   def index
     @games = Game.all.order(date: :desc)
   end
 
   def show; end
+
+  def iframe; end
 
   def new
     @game = if @current_user

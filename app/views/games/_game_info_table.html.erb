@@ -1,0 +1,34 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <td>White</td>
+      <td>
+        <% if game.white_win? %>
+          <span class="badge rounded-pill bg-success">Win</span>
+        <% elsif game.black_win? %>
+          <span class="badge rounded-pill bg-danger">Lose</span>
+        <% elsif game.draw? %>
+          <span class="badge rounded-pill bg-secondary">Draw</span>
+        <% end %>
+        <%= link_to game.white.name, game.white %>
+      </td>
+    </tr>
+    <tr>
+      <td>Black</td>
+      <td>
+        <% if game.black_win? %>
+          <span class="badge rounded-pill bg-success">Win</span>
+        <% elsif game.white_win? %>
+          <span class="badge rounded-pill bg-danger">Lose</span>
+        <% elsif game.draw? %>
+          <span class="badge rounded-pill bg-secondary">Draw</span>
+        <% end %>
+        <%= link_to game.black.name, game.black %>
+      </td>
+    </tr>
+    <tr>
+      <td>Date</td>
+      <td><%= game.date %></td>
+    </tr>
+  </tbody>
+</table>

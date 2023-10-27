@@ -44,7 +44,11 @@
 
   <body class="h-100" style="touch-action: manipulation;">
     <div class="min-vh-100">
-      <div><%= render partial: 'layouts/header' %></div>
+      <% if content_for?(:header_element) %>
+        <%= yield(:header_element) %>
+      <% else %>
+        <div><%= render partial: 'layouts/header' %></div>
+      <% end %>
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %> alert-dismissible">
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>

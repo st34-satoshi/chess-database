@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :games
   resources :players
   resources :users, only: %i[index new create]
   root to: 'games#index'
+  resources :games
+  get 'iframe_games/:id' => 'games#iframe'
 
   # session
   get 'signup' => 'users#new'
