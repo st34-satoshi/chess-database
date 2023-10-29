@@ -40,6 +40,13 @@ function movePositionAt(i){
     CHESS_BOARD.position(chess.fen());
     updateValueBar(chess); // update value asynchronously
     updateComment(chess);
+    updatePositionNumber(gameLength);
+}
+
+function updatePositionNumber(gameLength){
+    const l = Math.floor((gameLength + 1) / 2);
+    const d = document.getElementById("currentPositionNumber")
+    d.innerText = `${l}`;
 }
 
 function updateComment(chess){
