@@ -71,9 +71,11 @@ async function updateValueBar(chess){
 
     let bestMove = ''
     let whiteValue = 0
+    let whiteMate = null;
     if(movesStr in EngineResult){
         bestMove = EngineResult[movesStr]['bestMove']
         whiteValue = EngineResult[movesStr]['whiteValue']
+        whiteMate = EngineResult[movesStr]['whiteMate']
     }else{
         // fetch ai value and best move
         const url = `${getEngineApiPath()}/analysis`
@@ -93,32 +95,53 @@ async function updateValueBar(chess){
         if(result.message === 'ok'){
             bestMove = result.best_move
             const score = result.score
+            whiteMate = result.mate
             if(moves.length % 2 === 1){
                 whiteValue = -1 * score
+                if(whiteMate !== null){
+                    whiteMate = -1 * whiteMate;
+                }
             }else{
                 whiteValue = score
             }
         }
-        EngineResult[movesStr] = {"bestMove": bestMove, "whiteValue": whiteValue}
+        EngineResult[movesStr] = {"bestMove": bestMove, "whiteValue": whiteValue, "whiteMate": whiteMate}
     }
 
     // update value bar element
-    // plus 100 is plus 5%
-    let whitePercentage = 50 + whiteValue * 0.05
-    whitePercentage = Math.max(0, whitePercentage)
-    whitePercentage = Math.min(100, whitePercentage)
-    const blackPercentage = 100 - whitePercentage
     const whiteBar = document.getElementById("valueBarWhite")
     const blackBar = document.getElementById("valueBarBlack")
-    let whiteDisplayValue = ''
-    let blackDisplayValue = ''
-    if(whiteValue > 0){
-        whiteDisplayValue = whiteValue
+    if(whiteMate !== null){
+        // default is black win
+        let whitePercentage = 0
+        let blackPercentage = 100
+        let whiteDisplayValue = ''
+        let blackDisplayValue = `mate ${-1 * whiteMate}`
+        if(whiteMate > 0){
+            // white win
+            whitePercentage = 100
+            blackPercentage = 0
+            whiteDisplayValue = `mate ${whiteMate}`
+            blackDisplayValue = ''
+        }
+        updateValueBarDiv(whiteBar, whiteDisplayValue, whitePercentage)
+        updateValueBarDiv(blackBar, blackDisplayValue, blackPercentage)
     }else{
-        blackDisplayValue = -1 * whiteValue
+        // plus 100 is plus 5%
+        let whitePercentage = 50 + whiteValue * 0.05
+        whitePercentage = Math.max(0, whitePercentage)
+        whitePercentage = Math.min(100, whitePercentage)
+        const blackPercentage = 100 - whitePercentage
+        let whiteDisplayValue = ''
+        let blackDisplayValue = ''
+        if(whiteValue > 0){
+            whiteDisplayValue = whiteValue
+        }else{
+            blackDisplayValue = -1 * whiteValue
+        }
+        updateValueBarDiv(whiteBar, whiteDisplayValue, whitePercentage)
+        updateValueBarDiv(blackBar, blackDisplayValue, blackPercentage)
     }
-    updateValueBarDiv(whiteBar, whiteDisplayValue, whitePercentage)
-    updateValueBarDiv(blackBar, blackDisplayValue, blackPercentage)
     const bestMoveDiv = document.getElementById("analysisNext")
     bestMoveDiv.innerText = `${bestMove}`
 }
