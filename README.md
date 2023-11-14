@@ -65,3 +65,11 @@ ogp: https://unsplash.com/ja/%E5%86%99%E7%9C%9F/G1yhU1Ej-9A
 
 ## iframe example
 [iframe parent page](./doc/iframe.html)
+
+## Backup Database
+1. `docker-compose run web bash`
+1. `pg_dump -h db -p 5432 -U postgres chess_database_development > /chess_database/backup/2023-11-14.psql`
+
+restore
+1. `create database chess_database_development` (or do it using rails)
+1. `psql -h db -p 5432 -U postgres d2 < /chess_database/backup.psql`
