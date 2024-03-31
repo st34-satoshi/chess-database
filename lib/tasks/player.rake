@@ -16,4 +16,12 @@ namespace :player do
     puts "finish fetch players"
     puts "player length = #{Player.all.length}"
   end
+
+  desc "create a player"
+  task create_player: :environment do
+    ncs_id = "T20240331"
+    name = "Player"
+    p = Player.find_by(ncs_id: ncs_id)
+    Player.create(name:, ncs_id:) if p.nil?
+  end
 end
