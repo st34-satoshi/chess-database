@@ -38,7 +38,7 @@ function movePositionAt(i){
         chess.move(history[i]);
     }
     CHESS_BOARD.position(chess.fen());
-    updateValueBar(chess); // update value asynchronously
+    // updateValueBar(chess); // update value asynchronously
     updateComment(chess);
     updatePositionNumber(gameLength);
 }
