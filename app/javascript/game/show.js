@@ -178,29 +178,9 @@ function setBoardFlipButton(){
     });
 }
 
-function setCopyPGNButton(){
-    $('#buttonCopyPGN').click(function() {
-        const moves = $('#gameMoves').text();
-        const copyButton = document.getElementById('buttonCopyPGN');
-        navigator.clipboard.writeText(moves).then(() => {
-            // success copy
-            const originalText = copyButton.innerText;
-            copyButton.innerText = 'Copied!';
-      
-            // back to original text
-            setTimeout(() => {
-              copyButton.innerText = originalText;
-            }, 2000); // display 2 seconds
-        }).catch(err => {
-            console.error('Failed to copy text: ', err);
-        });
-    });
-}
-
 $(function() {
     var board1 = Chessboard('board1', 'start');
     initializeChessBoard(board1);
     setBoardNextButtons();
     setBoardFlipButton();
-    setCopyPGNButton();
 })

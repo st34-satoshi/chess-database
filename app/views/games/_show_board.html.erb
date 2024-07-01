@@ -13,8 +13,8 @@
     <span class="align-middle">#<span id="currentPositionNumber">1</span></span>
     <button type="button" class="btn" id="buttonBoardNext"><i class="fas fa-step-forward"></i></button>
     <button type="button" class="btn" id="buttonBoardBigNext"><i class="fas fa-fast-forward"></i></button>
-    <button type="button" class="btn btn-outline-info" id="buttonBoardFlip">flip</button>
-    <button type="button" class="btn btn-outline-info" id="buttonCopyPGN">copy PGN</button>
+    <button type="button" class="btn btn-outline-secondary" id="buttonBoardFlip">flip</button>
+    <%= render "pgn_modal", pgn: pgn %>
   </div>
   <div style="min-height: 100px;" class="border m-1 board-max-width">
     <div id="commentOnCurrentMove">
