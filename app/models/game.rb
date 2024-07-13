@@ -23,6 +23,17 @@ class Game < ApplicationRecord
     result == 'Unknown'
   end
 
+  def create_both_player(white_name, black_name)
+    if self.white_id.blank? && white_name.present?
+      white = Player.find_or_create_by(name: white_name)
+      self.white_id = white.id
+    end
+    if self.black_id.blank? && black_name.present?
+      black = Player.find_or_create_by(name: black_name)
+      self.black_id = black.id
+    end
+  end
+
   def to_param
     public_uid
   end

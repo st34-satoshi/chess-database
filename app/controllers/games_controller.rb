@@ -30,6 +30,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+    @game.create_both_player(params[:game][:white_name], params[:game][:black_name])
 
     respond_to do |format|
       if @game.save
@@ -43,10 +44,14 @@ class GamesController < ApplicationController
   end
 
   def update
-    if @game.update(game_params)
+    @game.assign_attributes(game_params)
+    @game.create_both_player(params[:game][:white_name], params[:game][:black_name])
+    if @game.save
       flash[:success] = 'Game was successfully updated.'
       redirect_to game_path(@game)
     else
+      @players = Player.all
+      @player_hash = Player.name_id_hash
       render :edit, status: :unprocessable_entity
     end
   end
