@@ -4,6 +4,21 @@
 
 <h1>Games</h1>
 
+<div class="mb-3">
+  <%= form_with url: games_path, method: :get, local: true, class: "d-flex gap-2" do |form| %>
+    <%= form.text_field :search, 
+        placeholder: "プレーヤー名で検索", 
+        value: @search,
+        class: "form-control",
+        style: "max-width: 200px;" %>
+    <%= form.hidden_field :page, value: 1 %>
+    <%= form.submit "検索", class: "btn btn-primary" %>
+    <% if @search.present? %>
+      <%= link_to "クリア", games_path, class: "btn btn-outline-secondary" %>
+    <% end %>
+  <% end %>
+</div>
+
 <%= render "table", games: @games %>
 
 <% if @total_pages > 1 %>
@@ -12,7 +27,7 @@
       <ul class="pagination">
         <% if @page > 1 %>
           <li class="page-item">
-            <%= link_to "Previous", games_path(page: @page - 1), class: "page-link" %>
+            <%= link_to "Previous", games_path(page: @page - 1, search: @search), class: "page-link" %>
           </li>
         <% else %>
           <li class="page-item disabled">
@@ -27,14 +42,14 @@
             </li>
           <% else %>
             <li class="page-item">
-              <%= link_to page_num, games_path(page: page_num), class: "page-link" %>
+              <%= link_to page_num, games_path(page: page_num, search: @search), class: "page-link" %>
             </li>
           <% end %>
         <% end %>
 
         <% if @page < @total_pages %>
           <li class="page-item">
-            <%= link_to "Next", games_path(page: @page + 1), class: "page-link" %>
+            <%= link_to "Next", games_path(page: @page + 1, search: @search), class: "page-link" %>
           </li>
         <% else %>
           <li class="page-item disabled">

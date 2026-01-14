@@ -8,10 +8,20 @@ class GamesController < ApplicationController
   def index
     @per_page = 20
     @page = params[:page].to_i.positive? ? params[:page].to_i : 1
-    @total_games = Game.count
+    @search = params[:search]&.strip
+    
+    games_query = Game.all
+    if @search.present?
+      games_query = games_query.joins("INNER JOIN players AS white_players ON games.white_id = white_players.id")
+                               .joins("INNER JOIN players AS black_players ON games.black_id = black_players.id")
+                               .where("white_players.name ILIKE ? OR black_players.name ILIKE ?", 
+                                      "%#{@search}%", "%#{@search}%")
+    end
+    
+    @total_games = games_query.count
     @total_pages = (@total_games.to_f / @per_page).ceil
     offset = (@page - 1) * @per_page
-    @games = Game.all.order(date: :desc).limit(@per_page).offset(offset)
+    @games = games_query.order(date: :desc).limit(@per_page).offset(offset)
   end
 
   def show; end
