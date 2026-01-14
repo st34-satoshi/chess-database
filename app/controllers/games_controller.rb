@@ -6,7 +6,12 @@ class GamesController < ApplicationController
   after_action :allow_iframe, only: %i[iframe]
 
   def index
-    @games = Game.all.order(date: :desc)
+    @per_page = 20
+    @page = params[:page].to_i.positive? ? params[:page].to_i : 1
+    @total_games = Game.count
+    @total_pages = (@total_games.to_f / @per_page).ceil
+    offset = (@page - 1) * @per_page
+    @games = Game.all.order(date: :desc).limit(@per_page).offset(offset)
   end
 
   def show; end
