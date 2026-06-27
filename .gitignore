@@ -39,4 +39,6 @@ public/sitemap.xml.gz
 */.DS_Store
 .DS_Store
 
+/backup/*.sql
+/backup/*.psql
 /lib/runner/players.csv
