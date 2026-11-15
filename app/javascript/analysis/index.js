@@ -33,7 +33,16 @@ function initialize() {
         image.alt = ''; image.draggable = false;
         button.append(image);
       }
-      const label = document.createElement('small'); label.textContent = square; button.append(label);
+      if (file === files[0]) {
+        const label = document.createElement('small');
+        label.className = 'analysis-rank'; label.textContent = rank;
+        label.setAttribute('aria-hidden', 'true'); button.append(label);
+      }
+      if (rank === ranks[ranks.length - 1]) {
+        const label = document.createElement('small');
+        label.className = 'analysis-file'; label.textContent = file;
+        label.setAttribute('aria-hidden', 'true'); button.append(label);
+      }
       button.onclick = () => clickSquare(square);
       $('analysis-board').append(button);
     }
