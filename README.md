@@ -73,3 +73,28 @@ ogp: https://unsplash.com/ja/%E5%86%99%E7%9C%9F/G1yhU1Ej-9A
 restore
 1. `create database chess_database_development` (or do it using rails)
 1. `psql -h db -p 5432 -U postgres d2 < /chess_database/backup.psql`
+
+## Browser analysis
+
+`/analysis` accepts a pasted FEN or a single standard-chess PGN (main line).
+Stockfish.js 19.0.1 lite runs in a local Web Worker; no position is sent to an
+engine service. Serve `public/engine/*.wasm` as `application/wasm` and keep the
+matching JavaScript beside it. The bundled single-threaded engine needs no
+cross-origin isolation headers. License and upstream source links are in
+`public/engine/README.txt` and on the page.
+
+- Scores are from White's perspective; candidates are ranked for the side to move.
+- Candidate count defaults to 3, is configurable from 1 to 20, and is saved locally.
+- Analysis streams intermediate depths up to depth 24 and can be paused/resumed.
+- Click a piece and destination to move; promotion choice is below the board.
+- Editing permits arbitrary relocation (switches turn), addition/deletion (keeps
+  turn), and a turn switch. Occupied destinations are replaced. Editing resets
+  castling/en-passant rights and the halfmove clock. Invalid positions remain
+  editable but are not sent to the engine.
+- Back/forward restores full FEN snapshots. A new move/edit after going back
+  replaces the forward history; paste the original PGN again to restore its line.
+
+Run analysis unit tests, including the bundled WASM smoke test, with Node 20+:
+`node --test test/javascript/analysis.test.mjs`.
+Run the anonymous page integration test with:
+`bundle exec rails test test/controllers/analysis_controller_test.rb`.

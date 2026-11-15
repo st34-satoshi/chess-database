@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'analysis', to: 'analysis#index'
   resources :players
   resources :users, only: %i[index new create]
   root to: 'games#index'
