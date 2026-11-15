@@ -7,7 +7,9 @@
   <p class="text-muted">PGN・FENを貼り付けて解析。計算はこのブラウザ内で行います。</p>
   <div class="analysis-layout">
     <section aria-label="盤面と操作">
+      <div id="palette-top" class="analysis-palette" role="group" aria-label="黒の駒を追加"></div>
       <div id="analysis-board" class="analysis-board" aria-label="チェス盤"></div>
+      <div id="palette-bottom" class="analysis-palette" role="group" aria-label="白の駒を追加"></div>
       <p id="analysis-turn" class="mt-2"></p>
       <div class="analysis-controls">
         <button id="flip" class="btn btn-outline-secondary">盤面反転</button>
@@ -18,7 +20,7 @@
       </div>
       <label class="mt-3 d-block"><input id="edit" type="checkbox" checked> 編集モード</label>
       <div id="editor">
-        <p>移動元→移動先をクリック。移動で手番反転、追加・削除では手番維持。</p>
+        <p>駒をドラッグして追加・移動、ゴミ箱へドラッグして削除。タップでは駒や操作を選んでからマスを選択。移動で手番反転、追加・削除では手番維持。</p>
         <label for="piece-tool">操作・追加する駒</label>
         <select id="piece-tool" class="form-select">
           <option value="move">駒を移動</option><option value="delete">駒を削除</option>
@@ -26,7 +28,7 @@
             <option value="<%= piece %>"><%= label %></option>
           <% end %>
         </select>
-        <p class="text-muted small">自由編集ではキャスリング権・アンパッサンを解除します。駒があるマスには置き換えて配置します。</p>
+        <p class="text-muted small">自由編集ではキャスリング権を維持します。キング・対象ルークが初期位置にいない場合は、その権利を解除します。アンパッサンは解除します。駒があるマスには置き換えて配置します。</p>
       </div>
       <label for="promotion" class="mt-3">昇格先</label>
       <select id="promotion" class="form-select"><option value="q">クイーン</option><option value="r">ルーク</option><option value="b">ビショップ</option><option value="n">ナイト</option></select>

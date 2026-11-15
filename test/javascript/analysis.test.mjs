@@ -10,7 +10,7 @@ const { editedFen, unpack, validatePosition, readInput } = await import('data:te
 const { AnalysisEngine } = await import('../../app/javascript/analysis/engine.js');
 const start = new Chess().fen();
 
-test('editing preserves or swaps turn according to action, and clears special rights', () => {
+test('editing preserves or swaps turn according to action, and clears en passant', () => {
   const removed = editedFen(start, 'e2');
   assert.equal(unpack(removed).turn, 'w');
   assert.equal(unpack(removed).pieces.e2, undefined);
@@ -21,8 +21,33 @@ test('editing preserves or swaps turn according to action, and clears special ri
   assert.equal(unpack(moved).turn, 'b');
   assert.equal(unpack(moved).pieces.a8, undefined);
   assert.equal(unpack(moved).pieces.a4, 'r');
-  assert.equal(moved.split(' ').slice(2).join(' '), '- - 0 1');
+  assert.equal(moved.split(' ').slice(2).join(' '), 'KQk - 0 1');
   assert.equal(editedFen(start, 'e2', 'e2', 'P'), start);
+});
+test('editing preserves existing castling rights only when the required pieces remain', () => {
+  const rights = fen => fen.split(' ')[2];
+  assert.equal(rights(editedFen(start, 'e2', 'e4', 'P')), 'KQkq');
+  assert.equal(rights(editedFen(start, 'b1')), 'KQkq');
+  assert.equal(rights(editedFen(start, null, 'e4', 'N')), 'KQkq');
+  for (const [square, piece, remaining] of [
+    ['e1', 'K', 'kq'], ['e8', 'k', 'KQ'],
+    ['h1', 'R', 'Qkq'], ['a1', 'R', 'Kkq'],
+    ['h8', 'r', 'KQq'], ['a8', 'r', 'KQk']
+  ]) {
+    const removed = editedFen(start, square);
+    assert.equal(rights(removed), remaining);
+    assert.equal(rights(editedFen(start, square, 'd4', piece)), remaining);
+    assert.equal(rights(editedFen(start, null, square, piece === piece.toUpperCase() ? 'r' : 'R')), remaining);
+    assert.equal(rights(editedFen(removed, null, square, piece)), remaining);
+  }
+  assert.equal(rights(editedFen(start.replace('KQkq', 'Qk'), 'e2')), 'Qk');
+  assert.equal(rights(editedFen(start.replace('KQkq', '-'), 'e2')), '-');
+  const position = 'r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1';
+  const edited = editedFen(position, null, 'b3', 'N');
+  assert.equal(validatePosition(edited), null);
+  assert.ok(new Chess(edited).moves().includes('O-O'));
+  assert.ok(new Chess(edited).moves().includes('O-O-O'));
+  assert.equal(editedFen(position.replace(' - 0 1', ' e6 0 1'), null, 'b3', 'N').split(' ')[3], '-');
 });
 test('invalid engine positions are blocked while edited FEN can still exist', () => {
   assert.equal(validatePosition(start), null);

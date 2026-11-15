@@ -1,5 +1,10 @@
 import { Chess } from 'game/chess-1-0-0beta-6';
 
+const castlingPieces = [
+  ['K', 'e1', 'K', 'h1', 'R'], ['Q', 'e1', 'K', 'a1', 'R'],
+  ['k', 'e8', 'k', 'h8', 'r'], ['q', 'e8', 'k', 'a8', 'r']
+];
+
 export function unpack(fen) {
   const [placement, turn] = fen.split(' ');
   const pieces = {};
@@ -29,7 +34,12 @@ export function editedFen(fen, from, to, piece) {
     if (empty) row += empty;
     rows.push(row);
   }
-  return `${rows.join('/')} ${from && to ? (turn === 'w' ? 'b' : 'w') : turn} - - 0 1`;
+  const previousRights = fen.split(' ')[2] || '-';
+  const rights = castlingPieces
+    .filter(([right, kingSquare, king, rookSquare, rook]) =>
+      previousRights.includes(right) && pieces[kingSquare] === king && pieces[rookSquare] === rook)
+    .map(([right]) => right).join('') || '-';
+  return `${rows.join('/')} ${from && to ? (turn === 'w' ? 'b' : 'w') : turn} ${rights} - 0 1`;
 }
 
 export function validatePosition(fen) {
@@ -44,10 +54,7 @@ export function validatePosition(fen) {
       if (side.length > 16 || side.filter(p => p.toLowerCase() === 'p').length > 8) return '片側の駒は16個、ポーンは8個までです。';
     }
     const rights = fen.split(' ')[2] || '-';
-    for (const [right, kingSquare, king, rookSquare, rook] of [
-      ['K', 'e1', 'K', 'h1', 'R'], ['Q', 'e1', 'K', 'a1', 'R'],
-      ['k', 'e8', 'k', 'h8', 'r'], ['q', 'e8', 'k', 'a8', 'r']
-    ]) {
+    for (const [right, kingSquare, king, rookSquare, rook] of castlingPieces) {
       if (rights.includes(right) && (pieces[kingSquare] !== king || pieces[rookSquare] !== rook)) return 'キャスリング権と駒配置が一致していません。';
     }
     const chess = new Chess(fen);
