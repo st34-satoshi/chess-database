@@ -37,7 +37,7 @@ function initialize() {
       image.src = `/img/chesspieces/wikipedia/${white ? 'w' : 'b'}${type}.png`;
       image.alt = ''; image.draggable = false;
       button.append(image);
-      button.onclick = () => { $('piece-tool').value = piece; selected = null; draw(); };
+      button.onclick = () => { $('piece-tool').value = $('piece-tool').value === piece ? 'move' : piece; selected = null; draw(); };
       palette.append(button);
     }
     const trash = document.createElement('button');
@@ -45,7 +45,7 @@ function initialize() {
     trash.textContent = '🗑';
     trash.setAttribute('aria-label', '駒を削除');
     trash.setAttribute('aria-pressed', String($('piece-tool').value === 'delete'));
-    trash.onclick = () => { $('piece-tool').value = 'delete'; selected = null; draw(); };
+    trash.onclick = () => { $('piece-tool').value = $('piece-tool').value === 'delete' ? 'move' : 'delete'; selected = null; draw(); };
     palette.append(trash);
   }
   function draw() {
