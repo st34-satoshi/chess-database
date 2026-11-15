@@ -1,0 +1,497 @@
+Chess Database — ライセンス・ソースコード
+============================================
+
+Chess Database
+--------------
+Copyright (c) 2022-2026 Satoshi Tanaka
+
+This application is distributed under the GNU General Public License,
+version 3 (GPL-3.0-only). You may copy, modify and redistribute it under
+that license. It is provided WITHOUT ANY WARRANTY, including the implied
+warranties of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+License text (repository):
+https://github.com/st34-satoshi/chess-database/blob/main/LICENSE
+License text (served with this application): /engine/COPYING.txt
+Source code:
+https://github.com/st34-satoshi/chess-database
+Build/run instructions: README.md, Dockerfile, Gemfile and Gemfile.lock in
+that repository. Check out the commit used for the deployment when rebuilding.
+
+Third-party components retain their own copyright and license notices below.
+The earlier MIT notice is preserved at the end of this file; this change does
+not revoke permissions already granted for earlier MIT-licensed versions.
+
+Stockfish.js 19.0.1
+------------------
+Files: public/engine/stockfish-19-lite-single.js and matching .wasm
+Unmodified lite, single-threaded build from the stockfish@19.0.1 npm package.
+Stockfish.js 19 (c) 2026, Chess.com, LLC.
+Based on Stockfish (c) T. Romstad, M. Costalba, J. Kiiski, G. Linscott
+and other contributors. Neural network by Chris Bao (sscg13).
+License: GNU GPL version 3; see /engine/COPYING.txt.
+
+Package containing the distributed binaries:
+https://registry.npmjs.org/stockfish/-/stockfish-19.0.1.tgz
+Corresponding source (fixed release):
+https://github.com/nmrugg/stockfish.js/tree/v19.0.1
+Release source commit: 0d5dd7944f88c817c07a26bc4fb1905d5f9c46d6
+Source archive:
+https://github.com/nmrugg/stockfish.js/archive/0d5dd7944f88c817c07a26bc4fb1905d5f9c46d6.tar.gz
+Build instructions and scripts:
+https://github.com/nmrugg/stockfish.js/blob/v19.0.1/README.md#how-do-i-compile-the-engine
+https://github.com/nmrugg/stockfish.js/blob/v19.0.1/build.js
+Use the release's Emscripten 6.0.9 toolchain, Node.js and make, then run:
+  node build.js --single-threaded --lite
+The build script obtains/verifies the NNUE network and embeds it in the WASM.
+Network identified by the distributed engine: nn-61e7af4bb97d
+https://tests.stockfishchess.org/nns?network_name=nn-61e7af4bb97d
+Keep the matching JS/WASM files beside each other when serving the application.
+
+SHA-256 of the distributed files:
+ccb130d7ff29408531c47d859a49f91d59d4f482d05a53eb1a3231a4f624c91a  stockfish-19-lite-single.js
+ee4f115bdb2d32cadf96cada104a05b5ec257d7ad6f57582190b49bc71f096de  stockfish-19-lite-single.wasm
+
+Browser libraries and assets
+----------------------------
+chess.js 1.0.0-beta.6 — BSD-2-Clause
+Copyright (c) 2023, Jeff Hlywa (jhlywa@gmail.com). All rights reserved.
+Source: https://github.com/jhlywa/chess.js/tree/v1.0.0-beta.6
+Local copy: app/javascript/game/chess-1-0-0beta-6.js
+The local copy exposes Chess as an ES module. Its license notice is preserved.
+
+chessboard.js 1.0.0 — MIT
+Source: https://github.com/oakmac/chessboardjs/tree/v1.0.0
+
+chessboard2 0.3.0 — ISC
+Source: https://github.com/oakmac/chessboard2/tree/v0.3.0
+
+Bootstrap 5.0.2 — MIT (JavaScript bundle and CSS)
+Source: https://github.com/twbs/bootstrap/tree/v5.0.2
+The JavaScript bundle includes Popper, also MIT licensed:
+https://github.com/popperjs/popper-core
+
+jQuery 3.6.0 — MIT (loaded through the import map)
+Source: https://github.com/jquery/jquery/tree/3.6.0
+
+Font Awesome Free 5.15.3 — CSS: MIT; web fonts: SIL OFL 1.1
+Loaded from cdnjs. Its SVG/JS icons, if used, are CC BY 4.0.
+Source: https://github.com/FortAwesome/Font-Awesome/tree/5.15.3
+Copyright Fonticons, Inc. Brand icons remain trademarks of their owners.
+
+Wikipedia chess-piece artwork — Cburnett and Wikimedia contributors
+Files: public/img/chesspieces/wikipedia/*.png
+Artwork source and licensing alternatives (including GPL-2.0-or-later):
+https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces/Standard_transparent
+https://commons.wikimedia.org/wiki/File:Chess_plt45.svg
+These raster renditions are distributed under the GPLv3 option.
+
+Browser library license notices
+-------------------------------
+
+chess.js
+
+Copyright (c) 2023, Jeff Hlywa (jhlywa@gmail.com)
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+
+chessboard
+Copyright 2019 Chris Oakman
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+chessboard2
+ISC License
+
+Copyright (c) 2021, Chris Oakman
+
+Permission to use, copy, modify, and/or distribute this software for any purpose
+with or without fee is hereby granted, provided that the above copyright notice
+and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+THIS SOFTWARE.
+
+
+bootstrap
+The MIT License (MIT)
+
+Copyright (c) 2011-2021 Twitter, Inc.
+Copyright (c) 2011-2021 The Bootstrap Authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+popper
+The MIT License (MIT)
+
+Copyright (c) 2019 Federico Zivolo
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+jquery
+Copyright OpenJS Foundation and other contributors, https://openjsf.org/
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+fontawesome
+Font Awesome Free License
+-------------------------
+
+Font Awesome Free is free, open source, and GPL friendly. You can use it for
+commercial projects, open source projects, or really almost whatever you want.
+Full Font Awesome Free license: https://fontawesome.com/license/free.
+
+# Icons: CC BY 4.0 License (https://creativecommons.org/licenses/by/4.0/)
+In the Font Awesome Free download, the CC BY 4.0 license applies to all icons
+packaged as SVG and JS file types.
+
+# Fonts: SIL OFL 1.1 License (https://scripts.sil.org/OFL)
+In the Font Awesome Free download, the SIL OFL license applies to all icons
+packaged as web and desktop font files.
+
+# Code: MIT License (https://opensource.org/licenses/MIT)
+In the Font Awesome Free download, the MIT license applies to all non-font and
+non-icon files.
+
+# Attribution
+Attribution is required by MIT, SIL OFL, and CC BY licenses. Downloaded Font
+Awesome Free files already contain embedded comments with sufficient
+attribution, so you shouldn't need to do anything additional when using these
+files normally.
+
+We've kept attribution comments terse, so we ask that you do not actively work
+to remove them from files, especially code. They're a great way for folks to
+learn about Font Awesome.
+
+# Brand Icons
+All brand icons are trademarks of their respective owners. The use of these
+trademarks does not indicate endorsement of the trademark holder by Font
+Awesome, nor vice versa. **Please do not use brand logos for any purpose except
+to represent the company, product, or service to which they refer.**
+
+
+Ruby dependencies
+-----------------
+The following inventory is taken from the gemspecs resolved by Gemfile.lock
+(Ruby 3.1.3, Linux ARM64). The versioned gem packages contain their upstream
+source and license notices. These packages are installed by Bundler rather
+than vendored here. Platform-specific variants remain listed in Gemfile.lock.
+License names below are upstream metadata, not replacement license grants.
+For dual-licensed Ruby/BSD packages, the BSD-2-Clause option is available.
+MIT, BSD, ISC and Apache-2.0 components retain their original terms.
+
+actioncable 7.0.4 — MIT
+  https://rubygems.org/gems/actioncable/versions/7.0.4
+actionmailbox 7.0.4 — MIT
+  https://rubygems.org/gems/actionmailbox/versions/7.0.4
+actionmailer 7.0.4 — MIT
+  https://rubygems.org/gems/actionmailer/versions/7.0.4
+actionpack 7.0.4 — MIT
+  https://rubygems.org/gems/actionpack/versions/7.0.4
+actiontext 7.0.4 — MIT
+  https://rubygems.org/gems/actiontext/versions/7.0.4
+actionview 7.0.4 — MIT
+  https://rubygems.org/gems/actionview/versions/7.0.4
+activejob 7.0.4 — MIT
+  https://rubygems.org/gems/activejob/versions/7.0.4
+activemodel 7.0.4 — MIT
+  https://rubygems.org/gems/activemodel/versions/7.0.4
+activerecord 7.0.4 — MIT
+  https://rubygems.org/gems/activerecord/versions/7.0.4
+activestorage 7.0.4 — MIT
+  https://rubygems.org/gems/activestorage/versions/7.0.4
+activesupport 7.0.4 — MIT
+  https://rubygems.org/gems/activesupport/versions/7.0.4
+addressable 2.8.1 — Apache-2.0
+  https://rubygems.org/gems/addressable/versions/2.8.1
+ast 2.4.2 — MIT
+  https://rubygems.org/gems/ast/versions/2.4.2
+bcrypt 3.1.18 — MIT
+  https://rubygems.org/gems/bcrypt/versions/3.1.18
+bindex 0.8.1 — MIT
+  https://rubygems.org/gems/bindex/versions/0.8.1
+bootsnap 1.15.0 — MIT
+  https://rubygems.org/gems/bootsnap/versions/1.15.0
+builder 3.2.4 — MIT
+  https://rubygems.org/gems/builder/versions/3.2.4
+bundler 2.3.26 — MIT
+  https://rubygems.org/gems/bundler/versions/2.3.26
+capybara 3.38.0 — MIT
+  https://rubygems.org/gems/capybara/versions/3.38.0
+coderay 1.1.3 — MIT
+  https://rubygems.org/gems/coderay/versions/1.1.3
+concurrent-ruby 1.1.10 — MIT
+  https://rubygems.org/gems/concurrent-ruby/versions/1.1.10
+crass 1.0.6 — MIT
+  https://rubygems.org/gems/crass/versions/1.0.6
+date 3.3.3 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/date/versions/3.3.3
+debug 1.7.1 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/debug/versions/1.7.1
+erubi 1.12.0 — MIT
+  https://rubygems.org/gems/erubi/versions/1.12.0
+faraday 2.7.6 — MIT
+  https://rubygems.org/gems/faraday/versions/2.7.6
+faraday-net_http 3.0.2 — MIT
+  https://rubygems.org/gems/faraday-net_http/versions/3.0.2
+ffi 1.15.5 — BSD-3-Clause
+  https://rubygems.org/gems/ffi/versions/1.15.5
+globalid 1.0.0 — MIT
+  https://rubygems.org/gems/globalid/versions/1.0.0
+googleauth 1.5.2 — Apache-2.0
+  https://rubygems.org/gems/googleauth/versions/1.5.2
+i18n 1.12.0 — MIT
+  https://rubygems.org/gems/i18n/versions/1.12.0
+importmap-rails 1.1.5 — MIT
+  https://rubygems.org/gems/importmap-rails/versions/1.1.5
+io-console 0.6.0 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/io-console/versions/0.6.0
+irb 1.6.2 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/irb/versions/1.6.2
+jbuilder 2.11.5 — MIT
+  https://rubygems.org/gems/jbuilder/versions/2.11.5
+json 2.6.3 — Ruby
+  https://rubygems.org/gems/json/versions/2.6.3
+jwt 2.7.1 — MIT
+  https://rubygems.org/gems/jwt/versions/2.7.1
+loofah 2.19.1 — MIT
+  https://rubygems.org/gems/loofah/versions/2.19.1
+mail 2.8.0 — MIT
+  https://rubygems.org/gems/mail/versions/2.8.0
+marcel 1.0.2 — MIT / Apache-2.0
+  https://rubygems.org/gems/marcel/versions/1.0.2
+matrix 0.4.2 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/matrix/versions/0.4.2
+memoist 0.16.2 — MIT
+  https://rubygems.org/gems/memoist/versions/0.16.2
+method_source 1.0.0 — MIT
+  https://rubygems.org/gems/method_source/versions/1.0.0
+mini_mime 1.1.2 — MIT
+  https://rubygems.org/gems/mini_mime/versions/1.1.2
+minitest 5.16.3 — MIT
+  https://rubygems.org/gems/minitest/versions/5.16.3
+msgpack 1.6.0 — Apache 2.0
+  https://rubygems.org/gems/msgpack/versions/1.6.0
+multi_json 1.15.0 — MIT
+  https://rubygems.org/gems/multi_json/versions/1.15.0
+net-imap 0.3.4 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/net-imap/versions/0.3.4
+net-pop 0.1.2 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/net-pop/versions/0.1.2
+net-protocol 0.2.1 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/net-protocol/versions/0.2.1
+net-smtp 0.3.3 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/net-smtp/versions/0.3.3
+nio4r 2.5.8 — MIT
+  https://rubygems.org/gems/nio4r/versions/2.5.8
+nokogiri 1.13.10 — MIT
+  https://rubygems.org/gems/nokogiri/versions/1.13.10
+os 1.1.4 — MIT
+  https://rubygems.org/gems/os/versions/1.1.4
+parallel 1.22.1 — MIT
+  https://rubygems.org/gems/parallel/versions/1.22.1
+parser 3.1.3.0 — MIT
+  https://rubygems.org/gems/parser/versions/3.1.3.0
+pg 1.4.5 — BSD-2-Clause
+  https://rubygems.org/gems/pg/versions/1.4.5
+pry 0.14.1 — MIT
+  https://rubygems.org/gems/pry/versions/0.14.1
+pry-rails 0.3.9 — MIT
+  https://rubygems.org/gems/pry-rails/versions/0.3.9
+public_suffix 5.0.1 — MIT
+  https://rubygems.org/gems/public_suffix/versions/5.0.1
+public_uid 2.2.0 — MIT
+  https://rubygems.org/gems/public_uid/versions/2.2.0
+puma 5.6.5 — BSD-3-Clause
+  https://rubygems.org/gems/puma/versions/5.6.5
+racc 1.6.2 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/racc/versions/1.6.2
+rack 2.2.5 — MIT
+  https://rubygems.org/gems/rack/versions/2.2.5
+rack-test 2.0.2 — MIT
+  https://rubygems.org/gems/rack-test/versions/2.0.2
+rails 7.0.4 — MIT
+  https://rubygems.org/gems/rails/versions/7.0.4
+rails-dom-testing 2.0.3 — MIT
+  https://rubygems.org/gems/rails-dom-testing/versions/2.0.3
+rails-html-sanitizer 1.4.4 — MIT
+  https://rubygems.org/gems/rails-html-sanitizer/versions/1.4.4
+railties 7.0.4 — MIT
+  https://rubygems.org/gems/railties/versions/7.0.4
+rainbow 3.1.1 — MIT
+  https://rubygems.org/gems/rainbow/versions/3.1.1
+rake 13.0.6 — MIT
+  https://rubygems.org/gems/rake/versions/13.0.6
+regexp_parser 2.6.1 — MIT
+  https://rubygems.org/gems/regexp_parser/versions/2.6.1
+reline 0.3.2 — Ruby
+  https://rubygems.org/gems/reline/versions/0.3.2
+rexml 3.2.5 — BSD-2-Clause
+  https://rubygems.org/gems/rexml/versions/3.2.5
+rubocop 1.41.1 — MIT
+  https://rubygems.org/gems/rubocop/versions/1.41.1
+rubocop-ast 1.24.1 — MIT
+  https://rubygems.org/gems/rubocop-ast/versions/1.24.1
+ruby-progressbar 1.11.0 — MIT
+  https://rubygems.org/gems/ruby-progressbar/versions/1.11.0
+ruby2_keywords 0.0.5 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/ruby2_keywords/versions/0.0.5
+rubyzip 2.3.2 — BSD 2-Clause
+  https://rubygems.org/gems/rubyzip/versions/2.3.2
+sassc 2.4.0 — MIT
+  https://rubygems.org/gems/sassc/versions/2.4.0
+sassc-rails 2.1.2 — MIT
+  https://rubygems.org/gems/sassc-rails/versions/2.1.2
+selenium-webdriver 4.7.1 — Apache-2.0
+  https://rubygems.org/gems/selenium-webdriver/versions/4.7.1
+signet 0.17.0 — Apache-2.0
+  https://rubygems.org/gems/signet/versions/0.17.0
+sitemap_generator 6.3.0 — MIT
+  https://rubygems.org/gems/sitemap_generator/versions/6.3.0
+sprockets 4.2.0 — MIT
+  https://rubygems.org/gems/sprockets/versions/4.2.0
+sprockets-rails 3.4.2 — MIT
+  https://rubygems.org/gems/sprockets-rails/versions/3.4.2
+thor 1.2.1 — MIT
+  https://rubygems.org/gems/thor/versions/1.2.1
+tilt 2.0.11 — MIT
+  https://rubygems.org/gems/tilt/versions/2.0.11
+timeout 0.3.1 — Ruby / BSD-2-Clause
+  https://rubygems.org/gems/timeout/versions/0.3.1
+tzinfo 2.0.5 — MIT
+  https://rubygems.org/gems/tzinfo/versions/2.0.5
+unicode-display_width 2.3.0 — MIT
+  https://rubygems.org/gems/unicode-display_width/versions/2.3.0
+web-console 4.2.0 — MIT
+  https://rubygems.org/gems/web-console/versions/4.2.0
+webdrivers 5.2.0 — MIT
+  https://rubygems.org/gems/webdrivers/versions/5.2.0
+websocket 1.2.9 — MIT
+  https://rubygems.org/gems/websocket/versions/1.2.9
+websocket-driver 0.7.5 — Apache-2.0
+  https://rubygems.org/gems/websocket-driver/versions/0.7.5
+websocket-extensions 0.1.5 — Apache-2.0
+  https://rubygems.org/gems/websocket-extensions/versions/0.1.5
+xpath 3.2.0 — MIT
+  https://rubygems.org/gems/xpath/versions/3.2.0
+zeitwerk 2.6.6 — MIT
+  https://rubygems.org/gems/zeitwerk/versions/2.6.6
+
+Preserved original Chess Database MIT notice
+-------------------------------------------
+MIT License
+
+Copyright (c) 2022 Satoshi Tanaka
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
