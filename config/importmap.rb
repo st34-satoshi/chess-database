@@ -17,3 +17,7 @@ pin 'game/chessboard2', preload: true
 pin 'game/chess-1-0-0beta-6', preload: true
 pin 'player/index', preload: true
 pin 'player/show', preload: true
+
+pin 'analysis/index'
+pin 'analysis/position'
+pin 'analysis/engine'

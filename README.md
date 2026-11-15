@@ -73,3 +73,7 @@ ogp: https://unsplash.com/ja/%E5%86%99%E7%9C%9F/G1yhU1Ej-9A
 restore
 1. `create database chess_database_development` (or do it using rails)
 1. `psql -h db -p 5432 -U postgres d2 < /chess_database/backup.psql`
+
+## License
+
+Distributed under [GPLv3](LICENSE). See [licenses and source code](public/licenses.txt) for third-party notices and the preserved original MIT notice.

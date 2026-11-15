@@ -1,0 +1,18 @@
+.analysis-layout { display: grid; grid-template-columns: minmax(280px, 560px) minmax(260px, 1fr); gap: 2rem; }
+.analysis-board { display: grid; grid-template-columns: repeat(8, 1fr); aspect-ratio: 1; border: 2px solid #33443b; }
+.analysis-square { position: relative; border: 0; border-radius: 0; padding: 0; background: #ece8d9; color: #111; font-size: clamp(24px, 5vw, 52px); line-height: 1; aspect-ratio: 1; }
+.analysis-square.dark { background: #819c89; }
+.analysis-square.selected { box-shadow: inset 0 0 0 4px #e3ab22; }
+.analysis-square:focus-visible { outline: 3px solid #005fcc; z-index: 1; }
+.analysis-square small { position: absolute; font: bold clamp(11px, 2vw, 15px) sans-serif; color: #496b55; pointer-events: none; }
+.analysis-square.dark small { color: #ece8d9; }
+.analysis-rank { top: 3px; left: 4px; }
+.analysis-file { bottom: 2px; right: 4px; }
+.analysis-controls { display: flex; flex-wrap: wrap; gap: .5rem; }
+.analysis-result { background: #f4f6f4; padding: 1.25rem; border-radius: .5rem; }
+#evaluation { display: block; font-size: 2.5rem; }
+#candidates { padding-left: 1.5rem; }
+#candidates button { text-align: left; width: 100%; margin-top: .6rem; }
+@media(max-width: 760px) { .analysis-layout { grid-template-columns: 1fr; } .analysis-square { font-size: clamp(26px, 8vw, 52px); } }
+
+.analysis-square img { width: 86%; height: 86%; object-fit: contain; pointer-events: none; }
