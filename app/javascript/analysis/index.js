@@ -1,6 +1,7 @@
 import 'application';
 import { Chess } from 'game/chess-1-0-0beta-6';
 import { unpack, editedFen, validatePosition, readInput } from 'analysis/position';
+import { bindEditorDrag } from 'analysis/drag';
 import { AnalysisEngine } from 'analysis/engine';
 
 function initialize() {
@@ -16,7 +17,42 @@ function initialize() {
     if (Number.isInteger(saved) && saved >= 1 && saved <= 20) $('candidate-count').value = saved;
   } catch (_) { /* Storage is optional. */ }
 
+  const cancelDrag = bindEditorDrag($('analysis'), {
+    enabled: () => $('edit').checked,
+    pieceAt: square => unpack(fen()).pieces[square],
+    drop: (from, to, piece) => change(editedFen(fen(), from, to, piece))
+  });
+  function drawPalette(id, white) {
+    const palette = $(id);
+    palette.hidden = !$('edit').checked;
+    palette.setAttribute('aria-label', `${white ? '白' : '黒'}の駒を追加`);
+    palette.replaceChildren();
+    for (const type of 'KQRBNP') {
+      const piece = white ? type : type.toLowerCase();
+      const button = document.createElement('button');
+      button.dataset.piece = piece;
+      button.setAttribute('aria-label', `${white ? '白' : '黒'}${names[type.toLowerCase()]}を追加`);
+      button.setAttribute('aria-pressed', String($('piece-tool').value === piece));
+      const image = document.createElement('img');
+      image.src = `/img/chesspieces/wikipedia/${white ? 'w' : 'b'}${type}.png`;
+      image.alt = ''; image.draggable = false;
+      button.append(image);
+      button.onclick = () => { $('piece-tool').value = piece; selected = null; draw(); };
+      palette.append(button);
+    }
+    const trash = document.createElement('button');
+    trash.dataset.trash = '';
+    trash.textContent = '🗑';
+    trash.setAttribute('aria-label', '駒を削除');
+    trash.setAttribute('aria-pressed', String($('piece-tool').value === 'delete'));
+    trash.onclick = () => { $('piece-tool').value = 'delete'; selected = null; draw(); };
+    palette.append(trash);
+  }
   function draw() {
+    cancelDrag();
+    $('analysis-board').classList.toggle('editing', $('edit').checked);
+    drawPalette('palette-top', flipped);
+    drawPalette('palette-bottom', !flipped);
     const { pieces, turn } = unpack(fen());
     $('analysis-board').replaceChildren();
     const files = [...'abcdefgh'], ranks = [8, 7, 6, 5, 4, 3, 2, 1];
@@ -24,6 +60,7 @@ function initialize() {
     for (const rank of ranks) for (const file of files) {
       const square = file + rank, piece = pieces[square];
       const button = document.createElement('button');
+      button.dataset.square = square;
       button.className = `analysis-square ${('abcdefgh'.indexOf(file) + rank) % 2 === 1 ? 'dark' : ''} ${selected === square ? 'selected' : ''}`;
       button.setAttribute('aria-label', `${square} ${piece ? (piece === piece.toUpperCase() ? '白' : '黒') + names[piece.toLowerCase()] : '空きマス'}`);
       button.setAttribute('aria-pressed', String(selected === square));

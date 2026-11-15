@@ -21,3 +21,5 @@ pin 'player/show', preload: true
 pin 'analysis/index'
 pin 'analysis/position'
 pin 'analysis/engine'
+
+pin 'analysis/drag'

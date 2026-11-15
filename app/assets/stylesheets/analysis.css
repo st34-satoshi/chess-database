@@ -16,3 +16,11 @@
 @media(max-width: 760px) { .analysis-layout { grid-template-columns: 1fr; } .analysis-square { font-size: clamp(26px, 8vw, 52px); } }
 
 .analysis-square img { width: 86%; height: 86%; object-fit: contain; pointer-events: none; }
+.analysis-palette { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin: 8px 0; }
+.analysis-palette[hidden] { display: none; }
+.analysis-palette button { min-width: 0; min-height: 44px; padding: 2px; border: 1px solid #819c89; border-radius: 4px; background: #f4f6f4; font-size: 26px; touch-action: none; }
+.analysis-palette img { width: 100%; max-height: 52px; object-fit: contain; pointer-events: none; }
+.analysis-palette [aria-pressed="true"] { box-shadow: inset 0 0 0 3px #e3ab22; }
+.analysis-board.editing { touch-action: none; }
+.analysis-palette .drop-target, .analysis-square.drop-target { box-shadow: inset 0 0 0 4px #005fcc; }
+.analysis-drag-ghost { position: fixed; width: 56px; height: 56px; transform: translate(-50%, -50%); pointer-events: none; z-index: 1000; opacity: .85; }
