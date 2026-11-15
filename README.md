@@ -81,7 +81,7 @@ Stockfish.js 19.0.1 lite runs in a local Web Worker; no position is sent to an
 engine service. Serve `public/engine/*.wasm` as `application/wasm` and keep the
 matching JavaScript beside it. The bundled single-threaded engine needs no
 cross-origin isolation headers. License and upstream source links are in
-`public/engine/README.txt` and on the page.
+`public/engine/README.txt`; the full license is in `public/engine/COPYING.txt`.
 
 - Scores are from White's perspective; candidates are ranked for the side to move.
 - Candidate count defaults to 3, is configurable from 1 to 20, and is saved locally.
