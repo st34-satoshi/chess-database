@@ -111,6 +111,15 @@ function initialize() {
   $('flip').onclick = () => { flipped = !flipped; draw(); };
   $('undo').onclick = () => { if (index > 0) { index--; selected = null; draw(); analyze(); } };
   $('redo').onclick = () => { if (index < history.length - 1) { index++; selected = null; draw(); analyze(); } };
+  document.addEventListener('keydown', event => {
+    if (event.defaultPrevented || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    const target = event.target;
+    if (target instanceof Element && (target.closest('input, textarea, select') || target.isContentEditable)) return;
+    const control = event.key === 'ArrowLeft' ? $('undo') : event.key === 'ArrowRight' ? $('redo') : null;
+    if (!control) return;
+    event.preventDefault();
+    control.click();
+  });
   $('reset').onclick = () => change(new Chess().fen());
   $('edit').onchange = () => { selected = null; $('editor').hidden = !$('edit').checked; draw(); };
   $('piece-tool').onchange = () => { selected = null; draw(); };
